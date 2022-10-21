@@ -75,6 +75,36 @@ const filter_reducer = (state, action) => {
         });
       }
 
+      if (category !== 'all') {
+        temporaryProducts = temporaryProducts.filter(
+          (product) => product.category === category
+        );
+      }
+
+      if (company !== 'all') {
+        temporaryProducts = temporaryProducts.filter(
+          (product) => product.company === company
+        );
+      }
+
+      if (color !== 'all') {
+        temporaryProducts = temporaryProducts.filter((product) => {
+          return product.colors.find((c) => c === color);
+        });
+      }
+
+      if (price) {
+        temporaryProducts = temporaryProducts.filter(
+          (product) => product.price <= price
+        );
+      }
+
+      if (shipping) {
+        temporaryProducts = temporaryProducts.filter(
+          (product) => product.shipping === true
+        );
+      }
+
       return {
         ...state,
         filtered_products: temporaryProducts,
