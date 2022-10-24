@@ -9,21 +9,24 @@ const AddToCart = ({ product }) => {
   const { addToCart } = useCartContext();
   const { id, stock, colors } = product;
 
-  const [amount, setAmount] = useState(1);
   const [mainColor, setMainColor] = useState(colors[0]);
+  const [amount, setAmount] = useState(1);
 
   const increase = () => {
     setAmount((oldAmount) => {
       let tempAmount = oldAmount + 1;
-      if (tempAmount > stock) tempAmount = stock;
+      if (tempAmount > stock) {
+        tempAmount = stock;
+      }
       return tempAmount;
     });
   };
-
   const decrease = () => {
     setAmount((oldAmount) => {
       let tempAmount = oldAmount - 1;
-      if (tempAmount < 1) tempAmount = 1;
+      if (tempAmount < 1) {
+        tempAmount = 1;
+      }
       return tempAmount;
     });
   };
@@ -31,16 +34,16 @@ const AddToCart = ({ product }) => {
   return (
     <Wrapper>
       <div className='colors'>
-        <span>colors : </span>
+        <span> colors : </span>
         <div>
           {colors.map((color, index) => {
             return (
               <button
                 key={index}
+                style={{ background: color }}
                 className={`${
                   mainColor === color ? 'color-btn active' : 'color-btn'
                 }`}
-                style={{ backgroundColor: color }}
                 onClick={() => setMainColor(color)}
               >
                 {mainColor === color ? <FaCheck /> : null}
@@ -106,7 +109,6 @@ const Wrapper = styled.section`
   .btn-container {
     margin-top: 2rem;
   }
-
   .btn {
     margin-top: 1rem;
     width: 140px;
